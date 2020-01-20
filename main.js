@@ -1,19 +1,23 @@
-const createStudentComponent = (student) => {
+const createStudentComponent = (student) => `
+    <div id="student">
+        ${h1(student)}
+        ${section(student.subject)}
+        ${aside(student.info)}
+    </div>
+`
+
+const h1 = (student) => {
     if (student.score >= 60) {
-        return `
-    <div class="student">
-        <h1 class="xx-large passing">${student.name}</h1>
-        <section class="bordered dashed section-padded">${student.subject}</section>
-        <aside class="pushRight">${student.info}</aside>
-    </div>`
+        return `<h1 class="xx-large passing">${student.name}</h1>`
     }
-    return `
-    <div class="student">
-        <h1 class="xx-large failing">${student.name}</h1>
-        <section class="bordered dashed section-padded">${student.subject}</section>
-        <aside class="pushRight">${student.info}</aside>
-    </div>`
+    return `<h1 class="xx-large failing">${student.name}</h1>`
 }
+
+const section = (subject) =>
+`<section class="bordered dashed section--padded">${subject}</section>`
+
+const aside = (info) =>
+`<aside class="pushRight">${info}</aside>`
 
 const students = [
     {
