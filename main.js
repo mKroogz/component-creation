@@ -1,23 +1,23 @@
-const createStudentComponent = (student) => `
-    <div id="student">
-        ${h1(student)}
-        ${section(student.subject)}
-        ${aside(student.info)}
-    </div>
-`
-
-const h1 = (student) => {
+const createStudentComponent = (student) => {
     if (student.score >= 60) {
-        return `<h1 class="xx-large passing">${student.name}</h1>`
-    }
-    return `<h1 class="xx-large failing">${student.name}</h1>`
-}
+    return `
+    <div id="student">
+        ${element("h1", student.name, "xx-large passing")}
+        ${element("section", student.subject, "bordered dashed section--padded")}
+        ${element("aside", student.info, "pushRight")}
+    </div>
+`  }
+    return `
+    <div id="student">
+        ${element("h1", student.name, "xx-large failing")}
+        ${element("section", student.subject, "bordered dashed section--padded")}
+        ${element("aside", student.info, "pushRight")}
+    </div>
+`}
 
-const section = (subject) =>
-`<section class="bordered dashed section--padded">${subject}</section>`
-
-const aside = (info) =>
-`<aside class="pushRight">${info}</aside>`
+const element = (comp, text, classes) => `
+    <${comp} class="${classes}">${text}</${comp}>
+`
 
 const students = [
     {
@@ -100,5 +100,6 @@ const studentContainer = document.querySelector("#container")
 // Update its contents with the return value of the function
 
 for (const student of students) {
+
     studentContainer.innerHTML += createStudentComponent(student)
 }
